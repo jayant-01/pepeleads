@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Survey Responses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            background: #fff;
+            margin: 40px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background: #007BFF;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .home-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .home-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Survey Responses</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age Group</th>
+                <th>Gender</th>
+                <th>Alarm Usage</th>
+                <th>Alarm Choice</th>
+            </tr>
+            {% for response in responses %}
+            <tr>
+                <td>{{ response.id }}</td>
+                <td>{{ response.name }}</td>
+                <td>{{ response.age_group }}</td>
+                <td>{{ response.gender }}</td>
+                <td>{{ response.alarm_usage }}</td>
+                <td>{{ response.alarm_choice or 'N/A' }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="/" class="home-link">Go Back to Survey</a>
+    </div>
+</body>
+</html>

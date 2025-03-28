@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page 1 Responses</title>
+  <style>
+    /* Basic table styling */
+    body { background: #f0f4f8; font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+    .container { max-width: 800px; background: #fff; margin: 40px auto; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+    th { background: #007BFF; color: white; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Page 1 Responses</h1>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>  <!-- Updated column header -->
+        <th>Gender</th>
+        <th>Alarm Usage</th>
+      </tr>
+      {% for response in responses %}
+      <tr>
+        <td>{{ response.id }}</td>
+        <td>{{ response.name }}</td>
+        <td>{{ response.email }}</td>
+        <td>{{ response.age }}</td>  <!-- Use 'age' since that's the model column name -->
+        <td>{{ response.gender }}</td>
+        <td>{{ response.alarm_usage }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</body>
+</html>

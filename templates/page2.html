@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Survey Form - Page 2</title>
+  <style>
+    body {
+      background: #f0f4f8;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      background: #fff;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select,
+    input[type="range"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    button {
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Survey Form - Page 2</h1>
+    <form id="surveyForm1" method="post" action="{{ url_for('page2_bp.page2') }}">
+      <!-- 1. Name -->
+      <div class="question">
+        <label for="name1">1. Name *</label>
+        <input type="text" id="name1" name="name1" placeholder="Your name" required>
+      </div>
+      
+      <!-- 2. Email -->
+      <div class="question">
+        <label for="email1">2. Email *</label>
+        <input type="email" id="email1" name="email1" placeholder="Your email" required>
+      </div>
+      
+      <!-- 3. Password -->
+      <div class="question">
+        <label for="password1">3. Password *</label>
+        <input type="password" id="password1" name="password1" placeholder="Enter a password" required>
+      </div>
+      
+      <!-- 4. Age (Dropdown) -->
+      <div class="question">
+        <label for="age1">4. How old are you? *</label>
+        <select id="age1" name="age1" required>
+          <option value="" disabled selected>Select your age range</option>
+          <option value="18-24">18-24</option>
+          <option value="25-34">25-34</option>
+          <option value="35-44">35-44</option>
+          <option value="45-54">45-54</option>
+          <option value="55-64">55-64</option>
+          <option value="65+">65+</option>
+        </select>
+      </div>
+      
+      <!-- 5. Gender (Dropdown) -->
+      <div class="question">
+        <label for="gender1">5. What’s your gender? *</label>
+        <select id="gender1" name="gender1" required>
+          <option value="" disabled selected>Select your gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Non-binary">Non-binary</option>
+          <option value="Prefer not to say">Prefer not to say</option>
+        </select>
+      </div>
+      
+      <!-- 6. Alarm Clock Usage (Range) -->
+      <div class="question">
+        <label for="alarmUsage1">6. How many days a week do you use an alarm clock?</label>
+        <input type="range" id="alarmUsage1" name="alarmUsage1" min="0" max="7" value="7" oninput="this.nextElementSibling.value = this.value">
+        <output>7</output>
+      </div>
+      
+      <button type="submit">Next</button>
+    </form>
+  </div>
+</body>
+</html>

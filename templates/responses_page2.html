@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page 3 Responses</title>
+  <style>
+    body { background: #f0f4f8; font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+    .container { max-width: 800px; background: #fff; margin: 40px auto; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+    th { background: #007BFF; color: white; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Page 3 Responses</h1>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Alarm Choice</th>
+        <th>Features</th>
+        <th># of Alarms</th>
+        <th>Purchase Date</th>
+        <th>Alarm URL</th>
+        <th>Comments</th>
+      </tr>
+      {% for response in responses %}
+      <tr>
+        <td>{{ response.id }}</td>
+        <td>{{ response.alarm_choice }}</td>
+        <td>{{ response.features }}</td>
+        <td>{{ response.num_alarms }}</td>
+        <td>{{ response.purchase_date }}</td>
+        <td>{{ response.alarm_url }}</td>
+        <td>{{ response.comments }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</body>
+</html>

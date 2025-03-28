@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Survey Form - Page 3</title>
+  <style>
+    body {
+      background: #f0f4f8;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      background: #fff;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+    }
+    input[type="number"],
+    input[type="date"],
+    input[type="url"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .options label {
+      display: block;
+      font-weight: normal;
+      margin-bottom: 5px;
+    }
+    button {
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Survey Form - Page 3</h1>
+    <form id="surveyForm1" method="post" action="{{ url_for('page3_bp.page3') }}">
+
+      <!-- 7. Alarm Clock Choice (Dropdown) -->
+      <div class="question">
+        <label for="alarmChoice2">7. What’s your alarm clock of choice?</label>
+        <select id="alarmChoice2" name="alarmChoice2">
+          <option value="" disabled selected>Select an option</option>
+          <option value="Old-school">Old-school alarm clock (the kind with the bells)</option>
+          <option value="Smartphone">Smartphone app (fancy, huh?)</option>
+          <option value="Smartwatch">Smartwatch (because you’re basically a cyborg)</option>
+        </select>
+      </div>
+      
+      <!-- 8. Alarm Features (Checkboxes) -->
+      <div class="question">
+        <label>8. Which alarm clock features do you use?</label>
+        <div class="options">
+          <label><input type="checkbox" id="featureSnooze2" name="features2[]" value="Snooze"> Snooze</label>
+          <label><input type="checkbox" id="featureMultiple2" name="features2[]" value="Multiple alarms"> Multiple alarms</label>
+          <label><input type="checkbox" id="featureVoice2" name="features2[]" value="Voice commands"> Voice commands</label>
+          <label><input type="checkbox" id="featureCustom2" name="features2[]" value="Custom tones"> Custom tones</label>
+        </div>
+      </div>
+      
+      <!-- 9. Number Input -->
+      <div class="question">
+        <label for="numAlarms2">9. How many alarms do you set daily?</label>
+        <input type="number" id="numAlarms2" name="numAlarms2" placeholder="e.g., 2" min="0">
+      </div>
+      
+      <!-- 10. Date Input -->
+      <div class="question">
+        <label for="purchaseDate2">10. When did you purchase your primary alarm clock?</label>
+        <input type="date" id="purchaseDate2" name="purchaseDate2">
+      </div>
+      
+      <!-- 11. URL Input -->
+      <div class="question">
+        <label for="alarmURL2">11. What’s the URL of your favorite alarm clock website?</label>
+        <input type="url" id="alarmURL2" name="alarmURL2" placeholder="https://example.com">
+      </div>
+      
+      <!-- 12. Additional Comments (Textarea) -->
+      <div class="question">
+        <label for="comments2">12. Any additional comments?</label>
+        <textarea id="comments2" name="comments2" placeholder="Your comments here..."></textarea>
+      </div>
+      
+      <button type="button" onclick="window.history.back()">Back</button>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>

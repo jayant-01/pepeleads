@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Survey Form - Page 1</title>
+  <style>
+    body {
+      background: #f0f4f8;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      background: #fff;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+    }
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .options {
+      margin-left: 20px;
+    }
+    .options label {
+      display: block;
+      font-weight: normal;
+      margin-bottom: 5px;
+    }
+    .hidden {
+      display: none;
+    }
+    button {
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Page1</h1>
+    <h1>Wake Up Call: How Alarm Clocks Rule Your Life (and Why We’re Curious!)</h1>
+    <p>Hey there! ⏰ Ever wonder how much your alarm clock shapes your day? Whether you’re Team Classic Clock, Team Smartphone, or Team ‘Please, Just Five More Minutes,’ we want to hear from you...!</p>
+    <span>----------------------------------------------------------------------------------------------------------------</span>
+    <form id="surveyForm" method="post" action="/">
+      <!-- Name -->
+      <div class="question">
+        <label for="name">1. Name *</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required>
+      </div>
+      
+      <!-- Email -->
+      <div class="question">
+        <label for="email">2. Email *</label>
+        <input type="email" id="email" name="email" placeholder="Your email" required>
+      </div>
+      
+      <!-- Age -->
+      <div class="question">
+        <label>3. How old are you? *</label>
+        <div class="options">
+          <label><input type="radio" name="age" value="18-24" required> 18-24</label>
+          <label><input type="radio" name="age" value="25-34"> 25-34</label>
+          <label><input type="radio" name="age" value="35-44"> 35-44</label>
+          <label><input type="radio" name="age" value="45-54"> 45-54</label>
+          <label><input type="radio" name="age" value="55-64"> 55-64</label>
+          <label><input type="radio" name="age" value="65+"> 65+</label>
+        </div>
+      </div>
+      
+      <!-- Gender -->
+      <div class="question">
+        <label>4. What’s your gender? *</label>
+        <div class="options">
+          <label><input type="radio" name="gender" value="Male" required> Male</label>
+          <label><input type="radio" name="gender" value="Female"> Female</label>
+          <label><input type="radio" name="gender" value="Non-binary"> Non-binary</label>
+          <label><input type="radio" name="gender" value="Prefer not to say"> Prefer not to say</label>
+        </div>
+      </div>
+      
+      <!-- Alarm Clock Use -->
+      <div class="question">
+        <label>5. Do you use an alarm clock to wake up in the morning?</label>
+        <div class="options">
+          <label><input type="radio" name="alarmUsage" value="Every day" required> Yep, every day!</label>
+          <label><input type="radio" name="alarmUsage" value="Sometimes"> Sometimes, depends on the day.</label>
+          <label><input type="radio" name="alarmUsage" value="Natural"> Nope, I’m a natural riser.</label>
+        </div>
+      </div>
+      
+      <!-- Alarm Clock Choice -->
+      <div class="question" id="alarmChoiceSection">
+        <label>6. If yes, what’s your alarm clock of choice</label>
+        <div class="options">
+          <label><input type="radio" name="alarmChoice" value="Old-school"> Old-school alarm clock (the kind with the bells)</label>
+          <label><input type="radio" name="alarmChoice" value="Smartphone"> Smartphone app (fancy, huh?)</label>
+          <label><input type="radio" name="alarmChoice" value="Smartwatch"> Smartwatch (because you’re basically a cyborg)</label>
+          <label><input type="radio" name="alarmChoice" value="Other"> Other (spill the details!)</label>
+          <input type="text" id="otherAlarm" name="otherAlarm" placeholder="Other details" class="hidden">
+        </div>
+      </div>
+      
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    // Show/hide alarm clock details based on the alarm usage answer
+    const alarmUsageRadios = document.getElementsByName('alarmUsage');
+    const alarmChoiceSection = document.getElementById('alarmChoiceSection');
+    const otherAlarmInput = document.getElementById('otherAlarm');
+
+    function checkAlarmUsage() {
+      let value;
+      for (const radio of alarmUsageRadios) {
+        if (radio.checked) {
+          value = radio.value;
+          break;
+        }
+      }
+      // If user doesn't use an alarm clock, hide alarm choice section
+      if (value === 'Natural') {
+        alarmChoiceSection.style.display = 'none';
+      } else {
+        alarmChoiceSection.style.display = 'block';
+      }
+    }
+
+    // Add event listeners
+    alarmUsageRadios.forEach(radio => {
+      radio.addEventListener('change', checkAlarmUsage);
+    });
+
+    // Show text input when 'Other' is selected
+    const alarmChoiceRadios = document.getElementsByName('alarmChoice');
+    alarmChoiceRadios.forEach(radio => {
+      radio.addEventListener('change', function() {
+        if (this.value === 'Other') {
+          otherAlarmInput.classList.remove('hidden');
+        } else {
+          otherAlarmInput.classList.add('hidden');
+        }
+      });
+    });
+
+    // Run on page load in case a radio is pre-selected
+    checkAlarmUsage();
+  </script>
+</body>
+</html>
