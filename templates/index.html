@@ -71,8 +71,8 @@
 <body>
   <div class="container">
     <h1>Page1</h1>
-    <h1>Wake Up Call: How Alarm Clocks Rule Your Life (and Why We’re Curious!)</h1>
-    <p>Hey there! ⏰ Ever wonder how much your alarm clock shapes your day? Whether you’re Team Classic Clock, Team Smartphone, or Team ‘Please, Just Five More Minutes,’ we want to hear from you...!</p>
+    <h1>Wake Up Call: How Alarm Clocks Rule Your Life (and Why We're Curious!)</h1>
+    <p>Hey there! ⏰ Ever wonder how much your alarm clock shapes your day? Whether you're Team Classic Clock, Team Smartphone, or Team 'Please, Just Five More Minutes,' we want to hear from you...!</p>
     <span>----------------------------------------------------------------------------------------------------------------</span>
     <form id="surveyForm" method="post" action="/">
       <!-- Name -->
@@ -81,15 +81,21 @@
         <input type="text" id="name" name="name" placeholder="Your name" required>
       </div>
       
+      <!-- Referral ID -->
+      <div class="question">
+        <label for="referralId">2. Referral ID (Optional)</label>
+        <input type="text" id="referralId" name="referralId" placeholder="Enter referral ID if you have one" value="{{ referral_code if referral_code else '' }}">
+      </div>
+      
       <!-- Email -->
       <div class="question">
-        <label for="email">2. Email *</label>
+        <label for="email">3. Email *</label>
         <input type="email" id="email" name="email" placeholder="Your email" required>
       </div>
       
       <!-- Age -->
       <div class="question">
-        <label>3. How old are you? *</label>
+        <label>4. How old are you? *</label>
         <div class="options">
           <label><input type="radio" name="age" value="18-24" required> 18-24</label>
           <label><input type="radio" name="age" value="25-34"> 25-34</label>
@@ -102,7 +108,7 @@
       
       <!-- Gender -->
       <div class="question">
-        <label>4. What’s your gender? *</label>
+        <label>5. What's your gender? *</label>
         <div class="options">
           <label><input type="radio" name="gender" value="Male" required> Male</label>
           <label><input type="radio" name="gender" value="Female"> Female</label>
@@ -113,21 +119,21 @@
       
       <!-- Alarm Clock Use -->
       <div class="question">
-        <label>5. Do you use an alarm clock to wake up in the morning?</label>
+        <label>6. Do you use an alarm clock to wake up in the morning?</label>
         <div class="options">
           <label><input type="radio" name="alarmUsage" value="Every day" required> Yep, every day!</label>
           <label><input type="radio" name="alarmUsage" value="Sometimes"> Sometimes, depends on the day.</label>
-          <label><input type="radio" name="alarmUsage" value="Natural"> Nope, I’m a natural riser.</label>
+          <label><input type="radio" name="alarmUsage" value="Natural"> Nope, I'm a natural riser.</label>
         </div>
       </div>
       
       <!-- Alarm Clock Choice -->
       <div class="question" id="alarmChoiceSection">
-        <label>6. If yes, what’s your alarm clock of choice</label>
+        <label>7. If yes, what's your alarm clock of choice</label>
         <div class="options">
           <label><input type="radio" name="alarmChoice" value="Old-school"> Old-school alarm clock (the kind with the bells)</label>
           <label><input type="radio" name="alarmChoice" value="Smartphone"> Smartphone app (fancy, huh?)</label>
-          <label><input type="radio" name="alarmChoice" value="Smartwatch"> Smartwatch (because you’re basically a cyborg)</label>
+          <label><input type="radio" name="alarmChoice" value="Smartwatch"> Smartwatch (because you're basically a cyborg)</label>
           <label><input type="radio" name="alarmChoice" value="Other"> Other (spill the details!)</label>
           <input type="text" id="otherAlarm" name="otherAlarm" placeholder="Other details" class="hidden">
         </div>

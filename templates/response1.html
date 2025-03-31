@@ -51,6 +51,25 @@
         .home-link:hover {
             text-decoration: underline;
         }
+        .referral-link {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .referral-link:hover {
+            text-decoration: underline;
+        }
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 2px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        .copy-btn:hover {
+            background: #218838;
+        }
     </style>
 </head>
 <body>
@@ -60,6 +79,8 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Referral ID</th>
+                <th>Referral Link</th>
                 <th>Age Group</th>
                 <th>Gender</th>
                 <th>Alarm Usage</th>
@@ -69,7 +90,14 @@
             <tr>
                 <td>{{ response.id }}</td>
                 <td>{{ response.name }}</td>
-                <td>{{ response.age_group }}</td>
+                <td>{{ response.referral_id or 'N/A' }}</td>
+                <td>
+                    <a href="/?ref={{ response.id }}" class="referral-link" id="ref-link-{{ response.id }}">
+                        {{ request.host_url }}?ref={{ response.id }}
+                    </a>
+                    <button class="copy-btn" onclick="copyReferralLink('ref-link-{{ response.id }}')">Copy</button>
+                </td>
+                <td>{{ response.age }}</td>
                 <td>{{ response.gender }}</td>
                 <td>{{ response.alarm_usage }}</td>
                 <td>{{ response.alarm_choice or 'N/A' }}</td>
@@ -78,5 +106,17 @@
         </table>
         <a href="/" class="home-link">Go Back to Survey</a>
     </div>
+
+    <script>
+        function copyReferralLink(elementId) {
+            const linkElement = document.getElementById(elementId);
+            const linkText = linkElement.textContent.trim();
+            navigator.clipboard.writeText(linkText).then(() => {
+                alert('Referral link copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+    </script>
 </body>
 </html>
