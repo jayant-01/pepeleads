@@ -66,6 +66,64 @@
     button:hover {
       background: #0056b3;
     }
+    .options label {
+      display: block;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .options input[type="radio"] {
+      margin-right: 10px;
+    }
+    #femaleQuestion, #teenQuestion, #oldQuestion {
+      margin-top: 15px;
+      padding: 15px;
+      border-left: 3px solid #007BFF;
+      background-color: #f8f9fa;
+      display: none;
+    }
+    #teenQuestion {
+      border-left-color: #FF69B4;  /* Pink for teen section */
+    }
+    #oldQuestion {
+      border-left-color: #9370DB;  /* Purple for old section */
+    }
+    .question label {
+      font-size: 16px;
+      display: block;
+      margin-bottom: 15px;
+    }
+    .question .options label {
+      font-size: 15px;
+      padding: 8px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+    .question .options label:hover {
+      background-color: #e9ecef;
+    }
+    /* Add animation classes */
+    .fade-in {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+    }
+    /* Updated animation styles */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .show-question {
+        display: block !important;  /* Override display:none */
+        animation: fadeIn 0.8s ease-out forwards;
+    }
   </style>
 </head>
 <body>
@@ -102,12 +160,81 @@
       
       <!-- Gender -->
       <div class="question">
-        <label>5. What's your gender? *</label>
+        <label>4. What's your gender? *</label>
         <div class="options">
-          <label><input type="radio" name="gender" value="Male" required> Male</label>
-          <label><input type="radio" name="gender" value="Female"> Female</label>
-          <label><input type="radio" name="gender" value="Non-binary"> Non-binary</label>
-          <label><input type="radio" name="gender" value="Prefer not to say"> Prefer not to say</label>
+          <label><input type="radio" name="gender" value="Male" required onclick="handleGenderSelection('male')"> Male</label>
+          <label><input type="radio" name="gender" value="Female" onclick="handleGenderSelection('female')"> Female</label>
+          <label><input type="radio" name="gender" value="Teen Female" onclick="handleGenderSelection('teen')"> Teen Female</label>
+          <label><input type="radio" name="gender" value="Old Female" onclick="handleGenderSelection('old')"> Old Female</label>
+        </div>
+      </div>
+      
+      <!-- Female Day Experience Question (Initially Hidden) -->
+      <div class="question" id="femaleQuestion" style="display: none;">
+        <label>How is your day? Please tell us how your day has been.</label>
+        <div class="options">
+          <label>
+            <input type="radio" name="dayExperience" value="great">
+            🌟 Yeah, great of course!
+          </label>
+          <label>
+            <input type="radio" name="dayExperience" value="notBad">
+            😊 Not bad
+          </label>
+          <label>
+            <input type="radio" name="dayExperience" value="fine">
+            🤷‍♀️ Just fine
+          </label>
+          <label>
+            <input type="radio" name="dayExperience" value="worst">
+            😔 Worst day
+          </label>
+        </div>
+      </div>
+      
+      <!-- Teen Female Day Experience Question (Initially Hidden) -->
+      <div class="question" id="teenQuestion" style="display: none;">
+        <label>How is your day? Let us know how it went, cutie.</label>
+        <div class="options">
+          <label>
+            <input type="radio" name="dayExperience" value="slaying">
+            ✨ Slaying it!
+          </label>
+          <label>
+            <input type="radio" name="dayExperience" value="chill">
+            😊 Pretty chill
+          </label>
+          <label>
+            <input type="radio" name="dayExperience" value="normal">
+            😌 Just another day
+          </label>
+          <label>
+            <input type="radio" name="dayExperience" value="bad">
+            😩 Ugh, don't ask
+          </label>
+        </div>
+      </div>
+      
+      <!-- Old Female Day Experience Question (Initially Hidden) -->
+      <div class="question" id="oldQuestion" style="display: none;">
+        <label>How is your day? We'd love to hear about your day.</label>
+        <div class="options">
+          <label>
+            <input type="radio" name="dayExperience" value="blessed">
+            😊 Blessed and happy
+          </label>
+          <label>
+            <input type="radio" name="dayExperience" value="okay">
+            🌼 Feeling okay
+          </label>
+          <label>
+            <input type="radio" name="dayExperience" value="tired">
+            😌 A bit tired but managing
+          </label>
+          <label>
+            <input type="radio" name="dayExperience" value="notBest">
+            😞 Not the best day
+          </label>
         </div>
       </div>
       
@@ -178,6 +305,45 @@
 
     // Run on page load in case a radio is pre-selected
     checkAlarmUsage();
+
+    function handleGenderSelection(type) {
+      const femaleQuestion = document.getElementById('femaleQuestion');
+      const teenQuestion = document.getElementById('teenQuestion');
+      const oldQuestion = document.getElementById('oldQuestion');
+      const dayExperienceInputs = document.getElementsByName('dayExperience');
+      
+      // Remove animation class and hide all questions first
+      [femaleQuestion, teenQuestion, oldQuestion].forEach(question => {
+        question.style.display = 'none';
+        question.classList.remove('show-question');
+      });
+      
+      // Clear all selections
+      dayExperienceInputs.forEach(input => {
+        input.required = false;
+        input.checked = false;
+      });
+      
+      // Show appropriate question based on gender with animation
+      let targetQuestion = null;
+      if (type === 'female') {
+        targetQuestion = femaleQuestion;
+      } else if (type === 'teen') {
+        targetQuestion = teenQuestion;
+      } else if (type === 'old') {
+        targetQuestion = oldQuestion;
+      }
+      
+      if (targetQuestion) {
+        // Add animation class
+        setTimeout(() => {
+          targetQuestion.classList.add('show-question');
+        }, 50);  // Small delay to ensure animation triggers
+        
+        // Make the inputs required
+        dayExperienceInputs.forEach(input => input.required = true);
+      }
+    }
   </script>
 </body>
 </html>

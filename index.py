@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 import hashlib
+from sqlalchemy import text
 
 # Create a Blueprint for Page 1
 index_bp = Blueprint('index_bp', __name__)
@@ -28,6 +29,19 @@ def hash_referral_id(referral_id):
     # Create a hash of the referral ID
     return hashlib.sha256(referral_id.encode()).hexdigest()[:10]
 
+def add_day_experience_column():
+    try:
+        # Check if column exists
+        with db.engine.connect() as conn:
+            conn.execute(text("""
+                ALTER TABLE survey_response_index 
+                ADD COLUMN day_experience VARCHAR(50)
+            """))
+            conn.commit()
+    except Exception as e:
+        # Column might already exist
+        print(f"Note: {e}")
+
 class SurveyResponseIndex(db.Model):
     __tablename__ = 'survey_response_index'
     id = db.Column(db.Integer, primary_key=True)
@@ -35,6 +49,7 @@ class SurveyResponseIndex(db.Model):
     email = db.Column(db.String(100), nullable=False)
     age = db.Column(db.String(20), nullable=False)
     gender = db.Column(db.String(20), nullable=False)
+    day_experience = db.Column(db.String(50), nullable=True)  # New field
     alarm_usage = db.Column(db.String(50), nullable=False)
     alarm_choice = db.Column(db.String(50), nullable=True)
     other_alarm = db.Column(db.String(255), nullable=True)
@@ -55,25 +70,24 @@ def index():
         email = request.form.get('email')
         age = request.form.get('age')
         gender = request.form.get('gender')
+        day_experience = request.form.get('dayExperience')  # New field
         alarm_usage = request.form.get('alarmUsage')
         alarm_choice = request.form.get('alarmChoice')
         other_alarm = request.form.get('otherAlarm')
         
         # Get referral code from session if it exists
         referral_code = session.pop('referral_code', None)
-        
-        # Hash the referral code if it exists
         referral_hash = hash_referral_id(referral_code) if referral_code else None
 
-        # Check required fields
         if not all([name, email, age, gender, alarm_usage]):
-            return "Error: Name, Email, Age, Gender, and Alarm Usage are required!", 400
+            return "Error: Required fields are missing!", 400
 
         new_response = SurveyResponseIndex(
             name=name,
             email=email,
             age=age,
             gender=gender,
+            day_experience=day_experience,  # New field
             alarm_usage=alarm_usage,
             alarm_choice=alarm_choice,
             other_alarm=other_alarm,
@@ -82,7 +96,6 @@ def index():
 
         db.session.add(new_response)
         db.session.commit()
-        print("Page 1 response saved!")
         return redirect(url_for('index_bp.responses'))
     
     return render_template('index.html')

@@ -79,21 +79,23 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Referral Hash</th>
-                <th>Age</th>
                 <th>Gender</th>
+                <th>Day Experience</th>
+                <th>Age</th>
                 <th>Alarm Usage</th>
                 <th>Alarm Choice</th>
+                <th>Referral Hash</th>
             </tr>
             {% for response in responses %}
             <tr>
                 <td>{{ response.id }}</td>
                 <td>{{ response.name }}</td>
-                <td>{{ response.referral_hash or 'Direct Visit' }}</td>
-                <td>{{ response.age }}</td>
                 <td>{{ response.gender }}</td>
+                <td>{{ response.day_experience or 'N/A' }}</td>
+                <td>{{ response.age }}</td>
                 <td>{{ response.alarm_usage }}</td>
                 <td>{{ response.alarm_choice or 'N/A' }}</td>
+                <td>{{ response.referral_hash or 'Direct Visit' }}</td>
             </tr>
             {% endfor %}
         </table>
