@@ -89,4 +89,4 @@ def search():
     finally:
         session1.close()
         session2.close()
-        session3.close() 
+        session3.close()
