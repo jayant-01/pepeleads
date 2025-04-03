@@ -1,5 +1,5 @@
 from flask import Flask
-from index import index_bp, db as index_db, add_day_experience_column
+from index import index_bp, db as index_db, init_db
 from page2 import page2_bp
 from page3 import page3_bp
 import os
@@ -17,12 +17,8 @@ app.register_blueprint(index_bp)         # Handles index.html at '/'
 app.register_blueprint(page2_bp)         # Handles page2.html at '/page2'
 app.register_blueprint(page3_bp)         # Handles page3.html at '/page3'
 
-# Create/update tables
-with app.app_context():
-    # Create tables if they don't exist
-    index_db.create_all()
-    # Add new column if it doesn't exist
-    add_day_experience_column()
+# Initialize database with new columns
+init_db(app)
 
 if __name__ == '__main__':
     app.run(debug=True)

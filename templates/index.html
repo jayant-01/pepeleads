@@ -1,349 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Survey Form - Page 1</title>
-  <style>
-    body {
-      background: #f0f4f8;
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
-    .container {
-      max-width: 600px;
-      background: #fff;
-      margin: 40px auto;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-    label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 8px;
-      color: #555;
-    }
-    input[type="text"],
-    input[type="email"],
-    select,
-    textarea {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    .question {
-      margin-bottom: 20px;
-    }
-    .options {
-      margin-left: 20px;
-    }
-    .options label {
-      display: block;
-      font-weight: normal;
-      margin-bottom: 5px;
-    }
-    .hidden {
-      display: none;
-    }
-    button {
-      background: #007BFF;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    button:hover {
-      background: #0056b3;
-    }
-    .options label {
-      display: block;
-      margin-bottom: 10px;
-      cursor: pointer;
-    }
-    .options input[type="radio"] {
-      margin-right: 10px;
-    }
-    #femaleQuestion, #teenQuestion, #oldQuestion {
-      margin-top: 15px;
-      padding: 15px;
-      border-left: 3px solid #007BFF;
-      background-color: #f8f9fa;
-      display: none;
-    }
-    #teenQuestion {
-      border-left-color: #FF69B4;  /* Pink for teen section */
-    }
-    #oldQuestion {
-      border-left-color: #9370DB;  /* Purple for old section */
-    }
-    .question label {
-      font-size: 16px;
-      display: block;
-      margin-bottom: 15px;
-    }
-    .question .options label {
-      font-size: 15px;
-      padding: 8px;
-      border-radius: 4px;
-      transition: background-color 0.2s;
-    }
-    .question .options label:hover {
-      background-color: #e9ecef;
-    }
-    /* Add animation classes */
-    .fade-in {
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-    }
-    .fade-in.visible {
-      opacity: 1;
-    }
-    /* Updated animation styles */
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(-20px);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Survey Form</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5f6fa;
+            --text-color: #2c3e50;
+            --border-color: #dcdde1;
+            --hover-color: #357abd;
         }
-        to {
-            opacity: 1;
-            transform: translateY(0);
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-    }
-    .show-question {
-        display: block !important;  /* Override display:none */
-        animation: fadeIn 0.8s ease-out forwards;
-    }
-  </style>
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .question {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--secondary-color);
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
+        }
+
+        .question label {
+            display: block;
+            font-size: 1.2em;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: normal;
+            margin-bottom: 0;
+        }
+
+        .options label:hover {
+            border-color: var(--primary-color);
+            background: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+        }
+
+        .options input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        .options input[type="text"]:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 30px;
+        }
+
+        button[type="submit"]:hover {
+            background: var(--hover-color);
+        }
+
+        .required {
+            color: #e74c3c;
+            font-size: 0.9em;
+            margin-left: 5px;
+        }
+
+        #femaleQuestion {
+            background: #fff5f5;
+            border-left: 4px solid #e74c3c;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .question {
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Page1</h1>
-    <h1>Wake Up Call: How Alarm Clocks Rule Your Life (and Why We're Curious!)</h1>
-    <p>Hey there! ⏰ Ever wonder how much your alarm clock shapes your day? Whether you're Team Classic Clock, Team Smartphone, or Team 'Please, Just Five More Minutes,' we want to hear from you...!</p>
-    <span>----------------------------------------------------------------------------------------------------------------</span>
-    <form id="surveyForm" method="post" action="/">
-      <!-- Name -->
-      <div class="question">
-        <label for="name">1. Name *</label>
-        <input type="text" id="name" name="name" placeholder="Your name" required>
-      </div>
-      
-      <!-- Email -->
-      <div class="question">
-        <label for="email">3. Email *</label>
-        <input type="email" id="email" name="email" placeholder="Your email" required>
-      </div>
-      
-      <!-- Age -->
-      <div class="question">
-        <label>4. How old are you? *</label>
-        <div class="options">
-          <label><input type="radio" name="age" value="18-24" required> 18-24</label>
-          <label><input type="radio" name="age" value="25-34"> 25-34</label>
-          <label><input type="radio" name="age" value="35-44"> 35-44</label>
-          <label><input type="radio" name="age" value="45-54"> 45-54</label>
-          <label><input type="radio" name="age" value="55-64"> 55-64</label>
-          <label><input type="radio" name="age" value="65+"> 65+</label>
+    <div class="container">
+        <div class="header">
+            <h1>Survey Form</h1>
+            <p>Please fill out this survey to help us understand your preferences and needs.</p>
         </div>
-      </div>
-      
-      <!-- Gender -->
-      <div class="question">
-        <label>4. What's your gender? *</label>
-        <div class="options">
-          <label><input type="radio" name="gender" value="Male" required onclick="handleGenderSelection('male')"> Male</label>
-          <label><input type="radio" name="gender" value="Female" onclick="handleGenderSelection('female')"> Female</label>
-          <label><input type="radio" name="gender" value="Teen Female" onclick="handleGenderSelection('teen')"> Teen Female</label>
-          <label><input type="radio" name="gender" value="Old Female" onclick="handleGenderSelection('old')"> Old Female</label>
-        </div>
-      </div>
-      
-      <!-- Female Day Experience Question (Initially Hidden) -->
-      <div class="question" id="femaleQuestion" style="display: none;">
-        <label>How is your day? Please tell us how your day has been.</label>
-        <div class="options">
-          <label>
-            <input type="radio" name="dayExperience" value="great">
-            🌟 Yeah, great of course!
-          </label>
-          <label>
-            <input type="radio" name="dayExperience" value="notBad">
-            😊 Not bad
-          </label>
-          <label>
-            <input type="radio" name="dayExperience" value="fine">
-            🤷‍♀️ Just fine
-          </label>
-          <label>
-            <input type="radio" name="dayExperience" value="worst">
-            😔 Worst day
-          </label>
-        </div>
-      </div>
-      
-      <!-- Teen Female Day Experience Question (Initially Hidden) -->
-      <div class="question" id="teenQuestion" style="display: none;">
-        <label>How is your day? Let us know how it went, cutie.</label>
-        <div class="options">
-          <label>
-            <input type="radio" name="dayExperience" value="slaying">
-            ✨ Slaying it!
-          </label>
-          <label>
-            <input type="radio" name="dayExperience" value="chill">
-            😊 Pretty chill
-          </label>
-          <label>
-            <input type="radio" name="dayExperience" value="normal">
-            😌 Just another day
-          </label>
-          <label>
-            <input type="radio" name="dayExperience" value="bad">
-            😩 Ugh, don't ask
-          </label>
-        </div>
-      </div>
-      
-      <!-- Old Female Day Experience Question (Initially Hidden) -->
-      <div class="question" id="oldQuestion" style="display: none;">
-        <label>How is your day? We'd love to hear about your day.</label>
-        <div class="options">
-          <label>
-            <input type="radio" name="dayExperience" value="blessed">
-            😊 Blessed and happy
-          </label>
-          <label>
-            <input type="radio" name="dayExperience" value="okay">
-            🌼 Feeling okay
-          </label>
-          <label>
-            <input type="radio" name="dayExperience" value="tired">
-            😌 A bit tired but managing
-          </label>
-          <label>
-            <input type="radio" name="dayExperience" value="notBest">
-            😞 Not the best day
-          </label>
-        </div>
-      </div>
-      
-      <!-- Alarm Clock Use -->
-      <div class="question">
-        <label>6. Do you use an alarm clock to wake up in the morning?</label>
-        <div class="options">
-          <label><input type="radio" name="alarmUsage" value="Every day" required> Yep, every day!</label>
-          <label><input type="radio" name="alarmUsage" value="Sometimes"> Sometimes, depends on the day.</label>
-          <label><input type="radio" name="alarmUsage" value="Natural"> Nope, I'm a natural riser.</label>
-        </div>
-      </div>
-      
-      <!-- Alarm Clock Choice -->
-      <div class="question" id="alarmChoiceSection">
-        <label>7. If yes, what's your alarm clock of choice</label>
-        <div class="options">
-          <label><input type="radio" name="alarmChoice" value="Old-school"> Old-school alarm clock (the kind with the bells)</label>
-          <label><input type="radio" name="alarmChoice" value="Smartphone"> Smartphone app (fancy, huh?)</label>
-          <label><input type="radio" name="alarmChoice" value="Smartwatch"> Smartwatch (because you're basically a cyborg)</label>
-          <label><input type="radio" name="alarmChoice" value="Other"> Other (spill the details!)</label>
-          <input type="text" id="otherAlarm" name="otherAlarm" placeholder="Other details" class="hidden">
-        </div>
-      </div>
-      
-      <button type="submit">Submit</button>
-    </form>
-  </div>
 
-  <script>
-    // Show/hide alarm clock details based on the alarm usage answer
-    const alarmUsageRadios = document.getElementsByName('alarmUsage');
-    const alarmChoiceSection = document.getElementById('alarmChoiceSection');
-    const otherAlarmInput = document.getElementById('otherAlarm');
+        <form id="surveyForm" method="post" action="/">
+            <!-- Hidden input for device type -->
+            <input type="hidden" id="deviceType" name="deviceType">
+            
+            <!-- Name -->
+            <div class="question">
+                <label>1. What's your name? <span class="required">*</span></label>
+                <div class="options">
+                    <input type="text" name="name" required placeholder="Enter your name">
+                </div>
+            </div>
+            
+            <!-- Email -->
+            <div class="question">
+                <label>2. What's your email? <span class="required">*</span></label>
+                <div class="options">
+                    <input type="email" name="email" required placeholder="Enter your email">
+                </div>
+            </div>
+            
+            <!-- Age -->
+            <div class="question">
+                <label>3. What's your age? <span class="required">*</span></label>
+                <div class="options">
+                    <label><input type="radio" name="age" value="18-24" required> 18-24</label>
+                    <label><input type="radio" name="age" value="25-34"> 25-34</label>
+                    <label><input type="radio" name="age" value="35-44"> 35-44</label>
+                    <label><input type="radio" name="age" value="45-54"> 45-54</label>
+                    <label><input type="radio" name="age" value="55+"> 55+</label>
+                </div>
+            </div>
+            
+            <!-- Gender -->
+            <div class="question">
+                <label>4. What's your gender? <span class="required">*</span></label>
+                <div class="options">
+                    <label><input type="radio" name="gender" value="Male" required onclick="handleGenderSelection('male')"> Male</label>
+                    <label><input type="radio" name="gender" value="Female" onclick="handleGenderSelection('female')"> Female</label>
+                    <label><input type="radio" name="gender" value="Teen Female" onclick="handleGenderSelection('teen')"> Teen Female</label>
+                    <label><input type="radio" name="gender" value="Old Female" onclick="handleGenderSelection('old')"> Old Female</label>
+                </div>
+            </div>
+            
+            <!-- Female Day Experience Question (Initially Hidden) -->
+            <div class="question" id="femaleQuestion" style="display: none;">
+                <label>How is your day? Please tell us how your day has been.</label>
+                <div class="options">
+                    <label><input type="radio" name="dayExperience" value="great"> 🌟 Yeah, great of course!</label>
+                    <label><input type="radio" name="dayExperience" value="notBad"> 😊 Not bad</label>
+                    <label><input type="radio" name="dayExperience" value="fine"> 🤷‍♀️ Just fine</label>
+                    <label><input type="radio" name="dayExperience" value="worst"> 😔 Worst day</label>
+                </div>
+            </div>
+            
+            <!-- Alarm Usage -->
+            <div class="question">
+                <label>5. How often do you use an alarm? <span class="required">*</span></label>
+                <div class="options">
+                    <label><input type="radio" name="alarmUsage" value="Every day" required> Every day</label>
+                    <label><input type="radio" name="alarmUsage" value="Natural"> Natural</label>
+                    <label><input type="radio" name="alarmUsage" value="Sometimes"> Sometimes</label>
+                    <label><input type="radio" name="alarmUsage" value="Never"> Never</label>
+                </div>
+            </div>
+            
+            <!-- Alarm Choice -->
+            <div class="question">
+                <label>6. If yes, what's your alarm clock of choice?</label>
+                <div class="options">
+                    <label><input type="radio" name="alarmChoice" value="Old-school"> Old-school alarm clock (the kind with the bells)</label>
+                    <label><input type="radio" name="alarmChoice" value="Smart"> Smartphone app (fancy, huh?)</label>
+                    <label><input type="radio" name="alarmChoice" value="Smartwatch"> Smartwatch (because you're basically a cyborg)</label>
+                    <label><input type="radio" name="alarmChoice" value="Other"> Other (spill the details!)</label>
+                </div>
+            </div>
+            
+            <!-- Other Alarm -->
+            <div class="question" id="otherAlarmQuestion" style="display: none;">
+                <label>Please specify your preferred alarm type:</label>
+                <div class="options">
+                    <input type="text" name="otherAlarm" placeholder="Enter your preferred alarm type">
+                </div>
+            </div>
 
-    function checkAlarmUsage() {
-      let value;
-      for (const radio of alarmUsageRadios) {
-        if (radio.checked) {
-          value = radio.value;
-          break;
+            <button type="submit">Submit Survey</button>
+        </form>
+    </div>
+
+    <script>
+        // Device detection function
+        function detectDevice() {
+            const ua = navigator.userAgent;
+            const width = window.innerWidth;
+            let deviceType = 'desktop';
+
+            // Check if it's a mobile device
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua)) {
+                deviceType = 'mobile';
+            }
+            // Check if it's a tablet (based on screen width)
+            else if (width >= 768 && width <= 1024) {
+                deviceType = 'tablet';
+            }
+
+            // Set the device type in the hidden input
+            document.getElementById('deviceType').value = deviceType;
         }
-      }
-      // If user doesn't use an alarm clock, hide alarm choice section
-      if (value === 'Natural') {
-        alarmChoiceSection.style.display = 'none';
-      } else {
-        alarmChoiceSection.style.display = 'block';
-      }
-    }
 
-    // Add event listeners
-    alarmUsageRadios.forEach(radio => {
-      radio.addEventListener('change', checkAlarmUsage);
-    });
+        // Run device detection when page loads
+        window.addEventListener('load', detectDevice);
 
-    // Show text input when 'Other' is selected
-    const alarmChoiceRadios = document.getElementsByName('alarmChoice');
-    alarmChoiceRadios.forEach(radio => {
-      radio.addEventListener('change', function() {
-        if (this.value === 'Other') {
-          otherAlarmInput.classList.remove('hidden');
-        } else {
-          otherAlarmInput.classList.add('hidden');
+        // Show/hide alarm clock details based on the alarm usage answer
+        const alarmUsageRadios = document.getElementsByName('alarmUsage');
+        const otherAlarmQuestion = document.getElementById('otherAlarmQuestion');
+        const alarmChoiceRadios = document.getElementsByName('alarmChoice');
+
+        // Show/hide other alarm input based on alarm choice
+        alarmChoiceRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === 'Other') {
+                    otherAlarmQuestion.style.display = 'block';
+                } else {
+                    otherAlarmQuestion.style.display = 'none';
+                }
+            });
+        });
+
+        // Show/hide female-specific question based on gender selection
+        function handleGenderSelection(gender) {
+            const femaleQuestion = document.getElementById('femaleQuestion');
+            if (gender === 'female' || gender === 'teen' || gender === 'old') {
+                femaleQuestion.style.display = 'block';
+            } else {
+                femaleQuestion.style.display = 'none';
+            }
         }
-      });
-    });
-
-    // Run on page load in case a radio is pre-selected
-    checkAlarmUsage();
-
-    function handleGenderSelection(type) {
-      const femaleQuestion = document.getElementById('femaleQuestion');
-      const teenQuestion = document.getElementById('teenQuestion');
-      const oldQuestion = document.getElementById('oldQuestion');
-      const dayExperienceInputs = document.getElementsByName('dayExperience');
-      
-      // Remove animation class and hide all questions first
-      [femaleQuestion, teenQuestion, oldQuestion].forEach(question => {
-        question.style.display = 'none';
-        question.classList.remove('show-question');
-      });
-      
-      // Clear all selections
-      dayExperienceInputs.forEach(input => {
-        input.required = false;
-        input.checked = false;
-      });
-      
-      // Show appropriate question based on gender with animation
-      let targetQuestion = null;
-      if (type === 'female') {
-        targetQuestion = femaleQuestion;
-      } else if (type === 'teen') {
-        targetQuestion = teenQuestion;
-      } else if (type === 'old') {
-        targetQuestion = oldQuestion;
-      }
-      
-      if (targetQuestion) {
-        // Add animation class
-        setTimeout(() => {
-          targetQuestion.classList.add('show-question');
-        }, 50);  // Small delay to ensure animation triggers
-        
-        // Make the inputs required
-        dayExperienceInputs.forEach(input => input.required = true);
-      }
-    }
-  </script>
+    </script>
 </body>
 </html>
